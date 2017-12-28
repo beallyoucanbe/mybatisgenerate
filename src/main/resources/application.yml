@@ -1,0 +1,57 @@
+server:
+  port: 8090
+
+spring:
+  profiles:
+    active: dev
+  application:
+    name: mybatisgenerate
+  user:
+    datasource:
+      url: jdbc:mysql://${user.db.url}/world?useUnicode=true&amp;characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull&amp;transformedBitIsBoolean=true
+      username: ${user.db.username}
+      password: ${user.db.password}
+      driver-class-name: com.mysql.jdbc.Driver
+      type: com.alibaba.druid.pool.DruidDataSource
+      druid:
+        max-active: 20
+        initial-size: 1
+        min-idle: 3
+        max-wait: 60000
+        time-between-eviction-runs-millis: 60000
+        min-evictable-idle-time-millis: 300000
+        test-while-idle: true
+        test-on-borrow: false
+        test-on-return: false
+
+logging:
+  level:
+    root: 'info'
+  file: 'logs/user.log'
+  pattern:
+    file: '%d{yyyy/MM/dd-HH:mm} [%thread] %-5level %logger- %msg%n'
+    console: '%d{yyyy/MM/dd-HH:mm:ss} [%thread] %-5level %logger- %msg%n'
+---
+# 开发环境配置
+spring:
+  profiles: dev
+server:
+  port: 8090
+user:
+  db:
+    url: 127.0.0.1:3306
+    username: root
+    password: root
+---
+# 测试环境配置
+spring:
+  profiles: test
+server:
+  port: 9010
+user:
+  db:
+    url: 127.0.0.1:3306
+    username: root
+    password: root
+---
+# 生产环境配置
