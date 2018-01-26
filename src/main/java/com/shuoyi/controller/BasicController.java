@@ -22,6 +22,7 @@ public class BasicController {
     @ResponseBody
     public City testCity(){
 
+        System.out.println("12134kkkkkkk3");
         return cityService.getCityByPrimary(1);
     }
 }
